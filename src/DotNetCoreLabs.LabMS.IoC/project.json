@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0.0-*",
 
   "dependencies": {
@@ -8,7 +8,8 @@
     "Microsoft.Extensions.Configuration.Abstractions": "1.1.0",
     "Microsoft.Extensions.Options": "1.1.0",
     "DotNetCoreLabs.LabMS.Data": "1.0.0-*",
-    "DotNetCoreLabs.LabMS.Context": "1.0.0-*"
+    "DotNetCoreLabs.LabMS.Context": "1.0.0-*",
+    "DotNetCoreLabs.LabMS.Domain": "1.0.0-*"
   },
 
   "frameworks": {

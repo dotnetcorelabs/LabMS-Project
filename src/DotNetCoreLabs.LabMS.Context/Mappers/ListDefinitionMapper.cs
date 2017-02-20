@@ -13,10 +13,12 @@ namespace DotNetCoreLabs.LabMS.Context.Mappers
         {
             Table("ListDefinition");
 
-            Map(p => p.Id).Column("Id").Key(KeyType.Guid);
-            //Map(p => p.Title).Column("Title");
-            //Map(p => p.Uri).Column("Uri");
-            //Map(p => p.Description).Column("Description");
+            Map(p => p.Id).Column("Id").Key(KeyType.Identity);
+            Map(p => p.Title).Column("Title");
+            Map(p => p.Uri).Column("Uri");
+            Map(p => p.Description).Column("Description");
+            Map(p => p.ValidationResult).Ignore();
+
             AutoMap();
         }
     }

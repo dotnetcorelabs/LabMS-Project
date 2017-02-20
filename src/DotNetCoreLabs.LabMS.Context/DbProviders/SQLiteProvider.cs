@@ -1,10 +1,13 @@
-﻿using DotNetCoreLabs.LabMS.Context.Interfaces;
+﻿using DapperExtensions.Sql;
+using DotNetCoreLabs.LabMS.Context.Interfaces;
+using DotNetCoreLabs.LabMS.Context.Mappers;
 using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace DotNetCoreLabs.LabMS.Context.DbProviders
@@ -18,31 +21,39 @@ namespace DotNetCoreLabs.LabMS.Context.DbProviders
         public SQLiteProvider(string connectionString)
         {
             _connectionString = connectionString;
+            EnsureDatabase();
         }
 
         public DbConnection CreateDbConnection() => new SqliteConnection(_connectionString);
 
         public void EnsureDatabase()
         {
+            if (!_started)
+            {
+                if (!File.Exists(_connectionString))
+                {
+                    using (var db = CreateDbConnection())
+                    {
+                        var cmd = db.CreateCommand();
+                        cmd.CommandText = CreateSQL("listdefinition");
+                        if (db.State != System.Data.ConnectionState.Open)
+                        {
+                            db.Open();
+                        }
+                        cmd.ExecuteNonQuery();
+                        if (db.State != System.Data.ConnectionState.Closed)
+                        {
+                            db.Close();
+                        }
+                    }
+                }
+            }
             _started = true;
-            //if (!_started)
-            //{
-            //    if (!File.Exists(_connectionString))
-            //    {
-            //        using (var conn = CreateConnection())
-            //        {
-            //            conn.Open();
-            //            conn.Execute(
-            //                @"create table Customer
-            //  (
-            //     ID                                  integer identity primary key AUTOINCREMENT,
-            //     FirstName                           varchar(100) not null,
-            //     LastName                            varchar(100) not null,
-            //     DateOfBirth                         datetime not null
-            //  )");
-            //        }
-            //    }
-            //}
+        }
+
+        public string CreateSQL(string table)
+        {
+            return File.ReadAllText(Path.Combine(@"C:\temp\dbb", $"tbl_{table}.sql"));
         }
     }
 }

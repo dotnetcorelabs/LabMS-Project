@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DotNetCoreLabs.LabMS.Data
+namespace DotNetCoreLabs.LabMS.Context.DbProviders
 {
     public class DbOptions
     {

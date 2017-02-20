@@ -38,6 +38,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DapperExtensions", "src\Dap
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DotNetCoreLabs.LabMS.Domain", "src\DotNetCoreLabs.LabMS.Domain\DotNetCoreLabs.LabMS.Domain.xproj", "{DBB8A3C0-E98A-4261-8C5C-34D793DE7BCD}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DotNetCoreLabs.LabMS.Context.Test", "src\DotNetCoreLabs.LabMS.Context.Test\DotNetCoreLabs.LabMS.Context.Test.xproj", "{7CFF0809-152A-42A4-AD57-A0EB051210A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +74,10 @@ Global
 		{DBB8A3C0-E98A-4261-8C5C-34D793DE7BCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBB8A3C0-E98A-4261-8C5C-34D793DE7BCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBB8A3C0-E98A-4261-8C5C-34D793DE7BCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CFF0809-152A-42A4-AD57-A0EB051210A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CFF0809-152A-42A4-AD57-A0EB051210A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CFF0809-152A-42A4-AD57-A0EB051210A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CFF0809-152A-42A4-AD57-A0EB051210A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,5 +97,6 @@ Global
 		{5F0737FD-5F69-40A5-A0C7-65063B91F213} = {D6E0652F-6AEF-426D-8BCD-A843B0105BE8}
 		{4B5EAF5C-11F7-4184-B33D-FCD9B194B86C} = {BF6716BD-58E9-47AD-BA72-7691B8FA9138}
 		{DBB8A3C0-E98A-4261-8C5C-34D793DE7BCD} = {173FA1B7-25C5-40D6-A81C-D1397DAD59D2}
+		{7CFF0809-152A-42A4-AD57-A0EB051210A6} = {5F0737FD-5F69-40A5-A0C7-65063B91F213}
 	EndGlobalSection
 EndGlobal

@@ -1,13 +1,20 @@
-﻿using System;
+﻿using DotNetCoreLabs.LabMS.Domain.Interfaces.Validations;
+using DotNetCoreLabs.LabMS.Domain.Validations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace DotNetCoreLabs.LabMS.Domain.Models
 {
-    public abstract class Entity
+    public abstract class Entity : ISelfValidation
     {
-        public Guid Id { get; protected set; }
+        public int Id { get; set; }
+
+        public Entity()
+        {
+            ValidationResult = new ValidationResult();
+        }
 
         public override bool Equals(object obj)
         {
@@ -44,5 +51,9 @@ namespace DotNetCoreLabs.LabMS.Domain.Models
         {
             return GetType().Name + " [Id=" + Id + "]";
         }
+
+        public ValidationResult ValidationResult { get; set; }
+
+        public abstract bool IsValid();
     }
 }

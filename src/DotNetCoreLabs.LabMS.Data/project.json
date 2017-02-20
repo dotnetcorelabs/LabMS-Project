@@ -1,9 +1,12 @@
-﻿{
+{
   "version": "1.0.0-*",
 
   "dependencies": {
+    "DotNetCoreLabs.LabMS.Context": "1.0.0-*",
+    "DotNetCoreLabs.LabMS.Domain": "1.0.0-*",
     "NETStandard.Library": "1.6.1",
-    "System.Data.SqlClient": "4.3.0"
+    "System.Data.SqlClient": "4.3.0",
+    "System.Diagnostics.TraceSource": "4.0.0"
   },
 
   "frameworks": {

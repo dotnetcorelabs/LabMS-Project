@@ -1,9 +1,8 @@
-﻿using DotNetCoreLabs.LabMS.Context.Interfaces;
-using System;
-using System.Collections.Generic;
+﻿using DapperExtensions.Sql;
+using DotNetCoreLabs.LabMS.Context.Interfaces;
+using DotNetCoreLabs.LabMS.Context.Mappers;
 using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Reflection;
 
 namespace DotNetCoreLabs.LabMS.Context
 {
@@ -17,6 +16,15 @@ namespace DotNetCoreLabs.LabMS.Context
             _databaseProvider = databaseProvider;
         }
 
+        static DapperContext()
+        {
+            var assembly = new[] { typeof(ListDefinitionMapper).GetTypeInfo().Assembly };
+            DapperExtensions.DapperExtensions.SetMappingAssemblies(assembly);
+            DapperExtensions.DapperAsyncExtensions.SetMappingAssemblies(assembly);
+
+            DapperExtensions.DapperExtensions.SqlDialect = new SqliteDialect();
+            DapperExtensions.DapperAsyncExtensions.SqlDialect = new SqliteDialect();
+        }
 
         public IDbConnection Connection
         {
@@ -35,10 +43,49 @@ namespace DotNetCoreLabs.LabMS.Context
             }
         }
 
+        private IDbTransaction _transaction;
+
+        public IDbTransaction Transaction
+        {
+            get
+            {
+                if (_transaction == null)
+                {
+                    _transaction = Connection.BeginTransaction();
+                }
+                return _transaction;
+            }
+        }
+
         public void Dispose()
         {
             if (_connection != null && _connection.State == ConnectionState.Open)
+            {
                 _connection.Close();
+                _connection.Dispose();
+                _connection = null;
+            }
+            if (_transaction != null)
+            {
+                _transaction.Dispose();
+                _transaction = null;
+            }
+        }
+
+        public void Commit()
+        {
+            if (_transaction != null)
+            {
+                _transaction.Commit();
+            }
+        }
+
+        public void Rollback()
+        {
+            if (_transaction != null)
+            {
+                _transaction.Rollback();
+            }
         }
     }
 }
